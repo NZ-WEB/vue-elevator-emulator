@@ -1,27 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <TheBackgoundLayout :floors="5" :elevatorsCount="3" />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import HelloWorld from "./components/HelloWorld.vue";
+import AppTouchButton from "./components/AppTouchButton.vue";
+import TheBackgoundLayout from "./components/TheBackgoundLayout.vue";
 
 @Options({
   components: {
     HelloWorld,
+    AppTouchButton,
+    TheBackgoundLayout,
   },
 })
 export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  margin: 0px !important;
+  padding: 0px !important;
+
+  color: #370d85;
 }
 </style>
