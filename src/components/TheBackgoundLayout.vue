@@ -8,7 +8,7 @@
     >
       <span class="floor__number">{{ getCurrentFloor(floors, floor) }}</span>
       <app-touch-button
-        :isActive="hasActiveFloor(floor)"
+        :isActive="hasActiveFloor(getCurrentFloor(floors, floor))"
         @click="addActiveFloor(getCurrentFloor(floors, floor))"
       />
     </div>
@@ -44,16 +44,19 @@ export default class TheBackgoundLayout extends Vue {
   readonly floors!: number;
 
   @Prop(Number)
-  readonly elevatorsCount!: number;
+  readonly elevatorsCount: number = 4;
 
   public floorsCallsTurn: number[] = [];
-  public elevatorsArr: Elevator[] = new ElevatorBuilder(3, 1).build();
+  public elevatorsArr: Elevator[] = new ElevatorBuilder(
+    this.elevatorsCount,
+    1
+  ).build();
 
   public get getHeight(): string {
     return 100 / this.floors + "vh";
   }
 
-  public getCurrentFloor(floors, floor): number {
+  public getCurrentFloor(floors: number, floor: number): number {
     return floors - floor + 1;
   }
 
@@ -75,15 +78,21 @@ export default class TheBackgoundLayout extends Vue {
   onFloorsChange(val: number[], oldVal: number[]) {
     if (!this.floorsCallsTurn.length) return;
 
-    if (!this.findFreeElevator) {
-      console.log("Все лифты заняты");
-    } else {
-      this.findFreeElevator.setTarget(
-        this.floorsCallsTurn[this.floorsCallsTurn.length - 1]
-      );
-      this.floorsCallsTurn.pop();
-      console.log("Уладили и назначили задачу лифту", this.floorsCallsTurn);
-    }
+    const choiseFreeElevator = () => {
+      if (!this.findFreeElevator) {
+        // TODO make better
+        setTimeout(() => {
+          choiseFreeElevator();
+        }, 1000);
+      } else {
+        this.findFreeElevator.setTarget(
+          this.floorsCallsTurn[this.floorsCallsTurn.length - 1]
+        );
+        this.floorsCallsTurn.pop();
+      }
+    };
+
+    choiseFreeElevator();
   }
 }
 </script>
