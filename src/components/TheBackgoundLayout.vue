@@ -7,7 +7,10 @@
       :style="{ height: getHeight }"
     >
       <span class="floor__number">{{ floor }}</span>
-      <app-touch-button />
+      <app-touch-button
+        :isActive="hasActiveFloor(floor)"
+        @click="addActiveFloor(floor)"
+      />
     </div>
     <app-elevator
       :elevatorNumber="1"
@@ -40,8 +43,18 @@ export default class TheBackgoundLayout extends Vue {
   @Prop(Number)
   readonly floors!: number;
 
+  public floorsTurn: number[] = [];
+
   public get getHeight(): string {
     return 100 / this.floors + "vh";
+  }
+
+  public hasActiveFloor(floor: number): boolean {
+    return !!this.floorsTurn.find((item) => item === floor);
+  }
+
+  public addActiveFloor(floor: number): void {
+    this.floorsTurn.push(floor);
   }
 }
 </script>
