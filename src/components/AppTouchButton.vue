@@ -17,14 +17,14 @@ export default class AppTouchButton extends Vue {
 
 <style lang="scss" scoped>
 .touch-button {
-  background: rgb(0, 131, 11);
+  background: #97cded;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid #000;
+  border: 1px solid #b8afc9;
 
   &_active {
-    background: rgb(255, 153, 0);
+    background: #02a0da;
   }
 }
 </style>

@@ -1,12 +1,5 @@
 <template>
-  <TheBackgoundLayout :floors="5">
-    <template v-slot:elevators> elevators </template>
-
-    <template v-slot:buttons>
-      <app-touch-button isActive />
-      <app-touch-button />
-    </template>
-  </TheBackgoundLayout>
+  <TheBackgoundLayout :floors="5" />
 </template>
 
 <script lang="ts">
@@ -35,5 +28,7 @@ button {
 body {
   margin: 0px !important;
   padding: 0px !important;
+
+  color: #370d85;
 }
 </style>
