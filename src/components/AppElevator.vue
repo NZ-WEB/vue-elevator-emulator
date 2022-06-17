@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
-import { PropSync, Prop, Watch } from "vue-property-decorator";
+import { PropSync, Prop } from "vue-property-decorator";
 
 export default class AppElevator extends Vue {
   @Prop(Number)

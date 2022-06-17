@@ -6,10 +6,10 @@
       class="floor"
       :style="{ height: getHeight }"
     >
-      <span class="floor__number">{{ floor }}</span>
+      <span class="floor__number">{{ getCurrentFloor(floors, floor) }}</span>
       <app-touch-button
-        :isActive="hasActiveFloor(floor)"
-        @click="addActiveFloor(floor)"
+        :isActive="hasActiveFloor(getCurrentFloor(floors, floor))"
+        @click="addActiveFloor(getCurrentFloor(floors, floor))"
       />
     </div>
 
@@ -26,11 +26,12 @@
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
+import { Prop, Watch } from "vue-property-decorator";
 import AppTouchButton from "./AppTouchButton.vue";
 import AppElevator from "./AppElevator.vue";
 import { Elevator } from "@/core/elevator";
 import ElevatorBuilder from "@/core/elevators.builder";
+import { EStatus } from "@/types/status.enum";
 
 @Options({
   components: {
@@ -43,14 +44,26 @@ export default class TheBackgoundLayout extends Vue {
   readonly floors!: number;
 
   @Prop(Number)
-  readonly elevatorsCount!: number;
+  readonly elevatorsCount: number = 4;
 
   public floorsCallsTurn: number[] = [];
-
-  public elevatorsArr: Elevator[] = new ElevatorBuilder(3, 1).build();
+  public elevatorsArr: Elevator[] = new ElevatorBuilder(
+    this.elevatorsCount,
+    1
+  ).build();
 
   public get getHeight(): string {
     return 100 / this.floors + "vh";
+  }
+
+  public getCurrentFloor(floors: number, floor: number): number {
+    return floors - floor + 1;
+  }
+
+  private get findFreeElevator(): Elevator | undefined {
+    return this.elevatorsArr.find(
+      (elevator) => elevator.getStatus() === EStatus.free
+    );
   }
 
   public hasActiveFloor(floor: number): boolean {
@@ -61,10 +74,25 @@ export default class TheBackgoundLayout extends Vue {
     this.floorsCallsTurn.push(floor);
   }
 
-  mounted() {
-    console.log(this.elevatorsArr[0]);
-    this.elevatorsArr[0].setTarget(5);
-    console.log(this.elevatorsArr[0]);
+  @Watch("floorsCallsTurn", { immediate: true, deep: true })
+  onFloorsChange(val: number[], oldVal: number[]) {
+    if (!this.floorsCallsTurn.length) return;
+
+    const choiseFreeElevator = () => {
+      if (!this.findFreeElevator) {
+        // TODO make better
+        setTimeout(() => {
+          choiseFreeElevator();
+        }, 1000);
+      } else {
+        this.findFreeElevator.setTarget(
+          this.floorsCallsTurn[this.floorsCallsTurn.length - 1]
+        );
+        this.floorsCallsTurn.pop();
+      }
+    };
+
+    choiseFreeElevator();
   }
 }
 </script>

@@ -53,8 +53,6 @@ export class Elevator {
       } else {
         this.decrementFloor();
       }
-      console.log(this.target, "target");
-      console.log(this.activeFloor, "activeFloor");
 
       this.goToTarget();
     }, this.timeToMove * 1000);
