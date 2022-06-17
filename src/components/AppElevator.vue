@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
+import { PropSync, Prop, Watch } from "vue-property-decorator";
 
 export default class AppElevator extends Vue {
   @Prop(Number)
@@ -33,7 +33,7 @@ export default class AppElevator extends Vue {
   @Prop(Number)
   readonly floorsCount!: number;
 
-  @Prop(Number)
+  @PropSync("activeFloor", { type: Number })
   readonly activeFloor!: number;
 
   public get getElevatorWidth(): number {
@@ -41,9 +41,7 @@ export default class AppElevator extends Vue {
   }
 
   public get getElevatorPosition(): string {
-    return (
-      this.elevatorNumber * this.getElevatorWidth - this.getElevatorWidth + "vw"
-    );
+    return this.elevatorNumber * this.getElevatorWidth + "vw";
   }
 
   public get getBoxHeight(): number {

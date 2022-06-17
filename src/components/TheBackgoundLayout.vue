@@ -12,17 +12,14 @@
         @click="addActiveFloor(floor)"
       />
     </div>
+
     <app-elevator
-      :elevatorNumber="1"
-      :elevatorsCount="2"
+      v-for="(elevator, index) in elevatorsArr"
+      :key="index"
+      :elevatorNumber="index"
+      :elevatorsCount="elevatorsArr.length"
+      :activeFloor="elevator.getActiveFloor()"
       :floorsCount="floors"
-      :activeFloor="2"
-    />
-    <app-elevator
-      :elevatorNumber="2"
-      :elevatorsCount="2"
-      :floorsCount="floors"
-      :activeFloor="1"
     />
   </div>
 </template>
@@ -32,6 +29,8 @@ import { Vue, Options } from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import AppTouchButton from "./AppTouchButton.vue";
 import AppElevator from "./AppElevator.vue";
+import { Elevator } from "@/core/elevator";
+import ElevatorBuilder from "@/core/elevators.builder";
 
 @Options({
   components: {
@@ -43,18 +42,29 @@ export default class TheBackgoundLayout extends Vue {
   @Prop(Number)
   readonly floors!: number;
 
-  public floorsTurn: number[] = [];
+  @Prop(Number)
+  readonly elevatorsCount!: number;
+
+  public floorsCallsTurn: number[] = [];
+
+  public elevatorsArr: Elevator[] = new ElevatorBuilder(3, 1).build();
 
   public get getHeight(): string {
     return 100 / this.floors + "vh";
   }
 
   public hasActiveFloor(floor: number): boolean {
-    return !!this.floorsTurn.find((item) => item === floor);
+    return !!this.floorsCallsTurn.find((item) => item === floor);
   }
 
   public addActiveFloor(floor: number): void {
-    this.floorsTurn.push(floor);
+    this.floorsCallsTurn.push(floor);
+  }
+
+  mounted() {
+    console.log(this.elevatorsArr[0]);
+    this.elevatorsArr[0].setTarget(5);
+    console.log(this.elevatorsArr[0]);
   }
 }
 </script>

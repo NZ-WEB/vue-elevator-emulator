@@ -1,5 +1,5 @@
 <template>
-  <TheBackgoundLayout :floors="5" />
+  <TheBackgoundLayout :floors="5" :elevatorsCount="3" />
 </template>
 
 <script lang="ts">
