@@ -13,11 +13,13 @@
       :elevatorNumber="1"
       :elevatorsCount="2"
       :floorsCount="floors"
+      :activeFloor="2"
     />
     <app-elevator
       :elevatorNumber="2"
       :elevatorsCount="2"
       :floorsCount="floors"
+      :activeFloor="1"
     />
   </div>
 </template>
