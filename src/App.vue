@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import MainLayout from "./layouts/MainLayout/MainLayout.vue";
-import QuestionsLayout from "./components/QuestionsLayout.vue";
+import QuestionsLayout from "./layouts/QuestionsLayout/QuestionsLayout.vue";
 import { IConfig } from "./types/config.interface";
 
 @Options({
