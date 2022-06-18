@@ -117,13 +117,13 @@ export default class MainLayout extends Vue {
 
 <style lang="scss" scoped>
 .background {
-  background: #eae1ef;
+  background: #fff;
   width: 100vw;
   height: 100vh;
 }
 
 .floor {
-  border: 1px solid #b8afc9;
+  border: 1px solid #000;
   padding: 1em;
   box-sizing: border-box;
 

@@ -89,8 +89,8 @@ export default class AppElevator extends Vue {
 
   &__box {
     position: absolute;
-    background: #97cded;
-    border: 4px solid #02a0da;
+    background: #bfc2c7;
+    border: 4px solid #000;
     box-sizing: border-box;
     left: 50%;
     transform: translateX(-50%);

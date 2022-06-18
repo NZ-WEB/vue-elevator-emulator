@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <label for="floors">
-      <input type="text" name="floors" v-model="floors" />
-    </label>
-    <label for="elevators">
-      <input type="text" name="elevators" v-model="elevators" />
-    </label>
-    <label for="delay">
-      <input type="text" name="delay" v-model="delay" />
-    </label>
-    <button @click="handleSubmit">Сконфигурировать</button>
+  <div class="container">
+    <div class="questions-form">
+      <h4>Конфигуратор</h4>
+      <label for="floors">
+        Колличество этажей
+        <input type="text" name="floors" v-model="floors" />
+      </label>
+      <label for="elevators">
+        Колличество лифтов
+        <input type="text" name="elevators" v-model="elevators" />
+      </label>
+      <label for="delay">
+        Время задержки на этаже
+        <input type="text" name="delay" v-model="delay" />
+      </label>
+      <button @click="handleSubmit">Сконфигурировать</button>
+    </div>
   </div>
 </template>
 
@@ -37,3 +43,35 @@ export default class QuestionsLayout extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.questions-form {
+  border: 1px solid #000;
+  padding: 1em;
+  width: 70vw;
+
+  display: flex;
+  flex-direction: column;
+
+  label {
+    padding: 0.5em 0;
+  }
+
+  input {
+    width: 100%;
+    display: block;
+  }
+
+  button {
+    color: #fff;
+    background: #000;
+    padding: 0.5em;
+  }
+}
+</style>
