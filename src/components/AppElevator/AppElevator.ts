@@ -1,22 +1,17 @@
 import { Vue } from "vue-class-component";
-import { PropSync, Prop } from "vue-property-decorator";
+import { Prop } from "vue-property-decorator";
 
 export default class AppElevator extends Vue {
   @Prop(Number)
   readonly elevatorsCount!: number;
-
   @Prop(Number)
   readonly elevatorNumber!: number;
-
   @Prop(Number)
   readonly floorsCount!: number;
-
   @Prop(Boolean)
   readonly hasDelay!: boolean;
-
   @Prop(Number)
   readonly target!: number;
-
   @Prop(Number)
   readonly activeFloor!: number;
 

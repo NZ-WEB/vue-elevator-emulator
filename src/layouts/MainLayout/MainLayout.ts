@@ -1,6 +1,6 @@
 import { Vue, Options } from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
-import AppTouchButton from "../../components/AppTouchButton.vue";
+import AppTouchButton from "../../components/AppTouchButton/AppTouchButton.vue";
 import AppElevator from "../../components/AppElevator/AppElevator.vue";
 import { Elevator } from "@/core/elevator";
 import ElevatorBuilder from "@/core/elevators.builder";
