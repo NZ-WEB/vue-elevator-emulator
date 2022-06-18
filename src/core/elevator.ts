@@ -16,6 +16,8 @@ export class Elevator {
   }
 
   public setTarget(floor: number): void {
+    console.log(this.target, "target");
+
     this.target = floor;
     this.status = EStatus.buzy;
     this.goToTarget();
@@ -34,6 +36,8 @@ export class Elevator {
   }
 
   private goToTarget() {
+    if (!this.target) return;
+
     if (this.target === this.activeFloor) {
       this.status = EStatus.free;
       return;

@@ -44,7 +44,7 @@ export default class TheBackgoundLayout extends Vue {
   readonly floors!: number;
 
   @Prop(Number)
-  readonly elevatorsCount: number = 4;
+  readonly elevatorsCount: number = 1;
 
   public floorsCallsTurn: number[] = [];
   public elevatorsArr: Elevator[] = new ElevatorBuilder(
