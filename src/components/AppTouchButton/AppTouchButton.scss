@@ -1,0 +1,11 @@
+.touch-button {
+  background: #97cded;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #b8afc9;
+
+  &_active {
+    background: #02a0da;
+  }
+}

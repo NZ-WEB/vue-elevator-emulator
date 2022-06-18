@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import AppElevator from "@/components/AppElevator.vue";
+import AppElevator from "@/components/AppElevator/AppElevator.vue";
 
 describe("AppElevator", () => {
   it("show 1 floor when stay on 1 floor", () => {

@@ -1,37 +1,7 @@
-<template>
-  <div class="background">
-    <div
-      v-for="floor in floors"
-      :key="floor"
-      class="floor"
-      :style="{ height: getHeight }"
-    >
-      <span class="floor__number">{{ getCurrentFloor(floors, floor) }}</span>
-      <app-touch-button
-        :isActive="hasActiveFloor(getCurrentFloor(floors, floor))"
-        @click="addActiveFloor(getCurrentFloor(floors, floor))"
-        :isWaitForElevator="isWaitForElevator(getCurrentFloor(floors, floor))"
-      />
-    </div>
-
-    <app-elevator
-      v-for="(elevator, index) in elevatorsArr"
-      :key="index"
-      :elevatorNumber="index"
-      :elevatorsCount="elevatorsArr.length"
-      :activeFloor="elevator.getActiveFloor()"
-      :floorsCount="floors"
-      :hasDelay="elevator.getDelay()"
-      :target="elevator.getTarget()"
-    />
-  </div>
-</template>
-
-<script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
-import AppTouchButton from "./AppTouchButton.vue";
-import AppElevator from "./AppElevator.vue";
+import AppTouchButton from "../../components/AppTouchButton/AppTouchButton.vue";
+import AppElevator from "../../components/AppElevator/AppElevator.vue";
 import { Elevator } from "@/core/elevator";
 import ElevatorBuilder from "@/core/elevators.builder";
 import { EStatus } from "@/types/status.enum";
@@ -62,8 +32,7 @@ export default class MainLayout extends Vue {
   public isWaitForElevator(floor: number): boolean {
     return !!this.elevatorsArr.find(
       (elevator) =>
-        !!(elevator.getTarget() === floor) &&
-        !(elevator.getActiveFloor() === floor)
+        elevator.getTarget() === floor && !(elevator.getActiveFloor() === floor)
     );
   }
 
@@ -97,10 +66,10 @@ export default class MainLayout extends Vue {
   onFloorsChange() {
     if (!this.floorsCallsTurn.length) return;
 
-    const choiseFreeElevator = () => {
+    const chooseFreeElevator = () => {
       if (!this.findFreeElevator) {
         setTimeout(() => {
-          choiseFreeElevator();
+          chooseFreeElevator();
         }, 1000);
       } else {
         this.findFreeElevator.setTarget(
@@ -110,30 +79,6 @@ export default class MainLayout extends Vue {
       }
     };
 
-    choiseFreeElevator();
+    chooseFreeElevator();
   }
 }
-</script>
-
-<style lang="scss" scoped>
-.background {
-  background: #fff;
-  width: 100vw;
-  height: 100vh;
-}
-
-.floor {
-  border: 1px solid #000;
-  padding: 1em;
-  box-sizing: border-box;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__number {
-    height: 100%;
-    font-size: 1.2em;
-  }
-}
-</style>

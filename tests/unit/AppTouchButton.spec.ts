@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import AppTouchButton from "@/components/AppTouchButton.vue";
+import AppTouchButton from "@/components/AppTouchButton/AppTouchButton.vue";
 
 describe("AppTouchButton", () => {
   it("button active when clicked on it ", () => {
