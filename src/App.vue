@@ -10,14 +10,12 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import AppTouchButton from "./components/AppTouchButton.vue";
-import MainLayout from "./components/MainLayout.vue";
+import MainLayout from "./layouts/MainLayout/MainLayout.vue";
 import QuestionsLayout from "./components/QuestionsLayout.vue";
 import { IConfig } from "./types/config.interface";
 
 @Options({
   components: {
-    AppTouchButton,
     MainLayout,
     QuestionsLayout,
   },
