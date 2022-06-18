@@ -42,7 +42,7 @@ export default class AppElevator extends Vue {
   @Prop(Number)
   readonly target!: number;
 
-  @PropSync("activeFloor", { type: Number })
+  @Prop(Number)
   readonly activeFloor!: number;
 
   public get getElevatorWidth(): number {
