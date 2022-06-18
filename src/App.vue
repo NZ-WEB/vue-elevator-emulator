@@ -10,7 +10,6 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
 import AppTouchButton from "./components/AppTouchButton.vue";
 import MainLayout from "./components/MainLayout.vue";
 import QuestionsLayout from "./components/QuestionsLayout.vue";
@@ -18,7 +17,6 @@ import { IConfig } from "./types/config.interface";
 
 @Options({
   components: {
-    HelloWorld,
     AppTouchButton,
     MainLayout,
     QuestionsLayout,
