@@ -36,7 +36,10 @@ export class Elevator {
   }
 
   private goToTarget() {
-    if (!this.target) return;
+    if (!this.target) {
+      this.status = EStatus.free;
+      return;
+    }
 
     if (this.target === this.activeFloor) {
       this.status = EStatus.free;
