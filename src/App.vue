@@ -4,6 +4,7 @@
     v-if="configured"
     :floors="+floors"
     :elevatorsCount="+elevators"
+    :delay="+delay"
   />
 </template>
 
@@ -13,6 +14,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 import AppTouchButton from "./components/AppTouchButton.vue";
 import MainLayout from "./components/MainLayout.vue";
 import QuestionsLayout from "./components/QuestionsLayout.vue";
+import { IConfig } from "./types/config.interface";
 
 @Options({
   components: {
@@ -25,11 +27,13 @@ import QuestionsLayout from "./components/QuestionsLayout.vue";
 export default class App extends Vue {
   public elevators!: number;
   public floors!: number;
+  public delay!: number;
   public configured = false;
 
-  public setConfig(config: number[]) {
-    this.elevators = config[1];
-    this.floors = config[0];
+  public setConfig({ delay, elevators, floors }: IConfig) {
+    this.elevators = elevators;
+    this.floors = floors;
+    this.delay = delay;
     this.configured = true;
   }
 }

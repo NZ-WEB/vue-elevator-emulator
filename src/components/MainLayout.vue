@@ -49,6 +49,9 @@ export default class MainLayout extends Vue {
   @Prop(Number)
   readonly elevatorsCount!: number;
 
+  @Prop(Number)
+  readonly delay!: number;
+
   public floorsCallsTurn: number[] = [];
   public elevatorsArr: Elevator[] = [];
 
@@ -83,7 +86,11 @@ export default class MainLayout extends Vue {
   }
 
   created() {
-    this.elevatorsArr = new ElevatorBuilder(this.elevatorsCount, 1).build();
+    this.elevatorsArr = new ElevatorBuilder(
+      this.elevatorsCount,
+      1,
+      this.delay
+    ).build();
   }
 
   @Watch("floorsCallsTurn", { immediate: true, deep: true })
@@ -92,7 +99,6 @@ export default class MainLayout extends Vue {
 
     const choiseFreeElevator = () => {
       if (!this.findFreeElevator) {
-        // TODO make better
         setTimeout(() => {
           choiseFreeElevator();
         }, 1000);
