@@ -5,6 +5,7 @@ export class Elevator {
 
   private status: EStatus = EStatus.free;
   private activeFloor = 1;
+  private delay = false;
   private target: number = this.activeFloor;
 
   public getStatus(): typeof this.status {
@@ -13,6 +14,10 @@ export class Elevator {
 
   public getTarget(): typeof this.target {
     return this.target;
+  }
+
+  public getDelay(): typeof this.delay {
+    return this.delay;
   }
 
   public setTarget(floor: number): void {
@@ -33,9 +38,19 @@ export class Elevator {
     this.activeFloor--;
   }
 
+  private setDelay(delayTime: number, cb: () => void) {
+    this.delay = true;
+    setTimeout(() => {
+      cb();
+      this.delay = false;
+    }, delayTime * 1000);
+  }
+
   private goToTarget() {
-    if (this.target === this.activeFloor) {
-      this.status = EStatus.free;
+    if (!this.target || this.target === this.activeFloor) {
+      this.setDelay(3, () => {
+        this.status = EStatus.free;
+      });
       return;
     }
 

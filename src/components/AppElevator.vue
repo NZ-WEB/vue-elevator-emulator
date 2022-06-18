@@ -8,13 +8,16 @@
   >
     <div
       class="elevator__box"
+      :class="{ blink: hasDelay }"
       :style="{
         width: getBoxWidth,
         height: getBoxHeight + 'vh',
         bottom: getBoxFloor,
       }"
     >
-      {{ activeFloor }}
+      <span class="elevator__floor-window">
+        {{ activeFloor }} {{ getTargetDestination }}
+      </span>
     </div>
   </div>
 </template>
@@ -33,11 +36,28 @@ export default class AppElevator extends Vue {
   @Prop(Number)
   readonly floorsCount!: number;
 
+  @Prop(Boolean)
+  readonly hasDelay!: boolean;
+
+  @Prop(Number)
+  readonly target!: number;
+
   @PropSync("activeFloor", { type: Number })
   readonly activeFloor!: number;
 
   public get getElevatorWidth(): number {
     return 90 / this.elevatorsCount;
+  }
+
+  public get getTargetDestination() {
+    console.log(this.target, this.activeFloor);
+
+    if (this.target > this.activeFloor) {
+      return "↑";
+    } else if (this.target < this.activeFloor) {
+      return "↓";
+    }
+    return "";
   }
 
   public get getElevatorPosition(): string {
@@ -73,6 +93,16 @@ export default class AppElevator extends Vue {
     box-sizing: border-box;
     left: 50%;
     transform: translateX(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__floor-window {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    padding: 1em;
   }
 }
 </style>

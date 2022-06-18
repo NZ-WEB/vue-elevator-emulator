@@ -31,4 +31,16 @@ body {
 
   color: #370d85;
 }
+
+.blink {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 </style>

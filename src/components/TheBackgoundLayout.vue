@@ -10,6 +10,7 @@
       <app-touch-button
         :isActive="hasActiveFloor(getCurrentFloor(floors, floor))"
         @click="addActiveFloor(getCurrentFloor(floors, floor))"
+        :isWaitForElevator="isWaitForElevator(getCurrentFloor(floors, floor))"
       />
     </div>
 
@@ -20,6 +21,8 @@
       :elevatorsCount="elevatorsArr.length"
       :activeFloor="elevator.getActiveFloor()"
       :floorsCount="floors"
+      :hasDelay="elevator.getDelay()"
+      :target="elevator.getTarget()"
     />
   </div>
 </template>
@@ -44,7 +47,7 @@ export default class TheBackgoundLayout extends Vue {
   readonly floors!: number;
 
   @Prop(Number)
-  readonly elevatorsCount: number = 4;
+  readonly elevatorsCount: number = 1;
 
   public floorsCallsTurn: number[] = [];
   public elevatorsArr: Elevator[] = new ElevatorBuilder(
@@ -54,6 +57,14 @@ export default class TheBackgoundLayout extends Vue {
 
   public get getHeight(): string {
     return 100 / this.floors + "vh";
+  }
+
+  public isWaitForElevator(floor: number): boolean {
+    return !!this.elevatorsArr.find(
+      (elevator) =>
+        !!(elevator.getTarget() === floor) &&
+        !(elevator.getActiveFloor() === floor)
+    );
   }
 
   public getCurrentFloor(floors: number, floor: number): number {
@@ -75,7 +86,7 @@ export default class TheBackgoundLayout extends Vue {
   }
 
   @Watch("floorsCallsTurn", { immediate: true, deep: true })
-  onFloorsChange(val: number[], oldVal: number[]) {
+  onFloorsChange() {
     if (!this.floorsCallsTurn.length) return;
 
     const choiseFreeElevator = () => {
