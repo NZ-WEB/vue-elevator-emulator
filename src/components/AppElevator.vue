@@ -79,6 +79,9 @@ export default class AppElevator extends Vue {
 </script>
 
 <style lang="scss" scoped>
+* {
+  transition: all 1s ease;
+}
 .elevator {
   height: 100%;
   border: 1px solid #000;
