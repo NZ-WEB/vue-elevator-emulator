@@ -8,5 +8,5 @@
   ></button>
 </template>
 
-<script src="./AppTouchButton.ts"></script>
+<script lang="ts" src="./AppTouchButton.ts"></script>
 <style lang="scss" scoped src="./AppTouchButton.scss"></style>

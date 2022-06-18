@@ -22,5 +22,5 @@
   </div>
 </template>
 
-<script src="./AppElevator.ts"></script>
+<script lang="ts" src="./AppElevator.ts"></script>
 <style lang="scss" scoped src="./AppElevator.scss"></style>
