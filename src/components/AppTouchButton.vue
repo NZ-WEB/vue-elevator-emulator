@@ -33,16 +33,4 @@ export default class AppTouchButton extends Vue {
     background: #02a0da;
   }
 }
-
-.blink {
-  animation: blink 1s infinite;
-}
-@keyframes blink {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 </style>

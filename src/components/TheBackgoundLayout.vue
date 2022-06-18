@@ -21,6 +21,7 @@
       :elevatorsCount="elevatorsArr.length"
       :activeFloor="elevator.getActiveFloor()"
       :floorsCount="floors"
+      :hasDelay="elevator.getDelay()"
     />
   </div>
 </template>

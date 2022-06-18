@@ -8,6 +8,7 @@
   >
     <div
       class="elevator__box"
+      :class="{ blink: hasDelay }"
       :style="{
         width: getBoxWidth,
         height: getBoxHeight + 'vh',
@@ -32,6 +33,9 @@ export default class AppElevator extends Vue {
 
   @Prop(Number)
   readonly floorsCount!: number;
+
+  @Prop(Boolean)
+  readonly hasDelay!: boolean;
 
   @PropSync("activeFloor", { type: Number })
   readonly activeFloor!: number;
