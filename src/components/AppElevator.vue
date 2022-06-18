@@ -50,8 +50,6 @@ export default class AppElevator extends Vue {
   }
 
   public get getTargetDestination() {
-    console.log(this.target, this.activeFloor);
-
     if (this.target > this.activeFloor) {
       return "↑";
     } else if (this.target < this.activeFloor) {
@@ -79,6 +77,9 @@ export default class AppElevator extends Vue {
 </script>
 
 <style lang="scss" scoped>
+* {
+  transition: all 1s ease;
+}
 .elevator {
   height: 100%;
   border: 1px solid #000;
@@ -88,8 +89,8 @@ export default class AppElevator extends Vue {
 
   &__box {
     position: absolute;
-    background: #97cded;
-    border: 4px solid #02a0da;
+    background: #bfc2c7;
+    border: 4px solid #000;
     box-sizing: border-box;
     left: 50%;
     transform: translateX(-50%);

@@ -42,18 +42,18 @@ import { EStatus } from "@/types/status.enum";
     AppElevator,
   },
 })
-export default class TheBackgoundLayout extends Vue {
+export default class MainLayout extends Vue {
   @Prop(Number)
   readonly floors!: number;
 
   @Prop(Number)
-  readonly elevatorsCount: number = 1;
+  readonly elevatorsCount!: number;
+
+  @Prop(Number)
+  readonly delay!: number;
 
   public floorsCallsTurn: number[] = [];
-  public elevatorsArr: Elevator[] = new ElevatorBuilder(
-    this.elevatorsCount,
-    1
-  ).build();
+  public elevatorsArr: Elevator[] = [];
 
   public get getHeight(): string {
     return 100 / this.floors + "vh";
@@ -85,13 +85,20 @@ export default class TheBackgoundLayout extends Vue {
     this.floorsCallsTurn.push(floor);
   }
 
+  created() {
+    this.elevatorsArr = new ElevatorBuilder(
+      this.elevatorsCount,
+      1,
+      this.delay
+    ).build();
+  }
+
   @Watch("floorsCallsTurn", { immediate: true, deep: true })
   onFloorsChange() {
     if (!this.floorsCallsTurn.length) return;
 
     const choiseFreeElevator = () => {
       if (!this.findFreeElevator) {
-        // TODO make better
         setTimeout(() => {
           choiseFreeElevator();
         }, 1000);
@@ -110,13 +117,13 @@ export default class TheBackgoundLayout extends Vue {
 
 <style lang="scss" scoped>
 .background {
-  background: #eae1ef;
+  background: #fff;
   width: 100vw;
   height: 100vh;
 }
 
 .floor {
-  border: 1px solid #b8afc9;
+  border: 1px solid #000;
   padding: 1em;
   box-sizing: border-box;
 

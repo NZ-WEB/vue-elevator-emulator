@@ -1,7 +1,7 @@
 import { EStatus } from "@/types/status.enum";
 
 export class Elevator {
-  constructor(private timeToMove: number = 3) {}
+  constructor(private timeToMove: number, private delayTime: number) {}
 
   private status: EStatus = EStatus.free;
   private activeFloor = 1;
@@ -48,7 +48,7 @@ export class Elevator {
 
   private goToTarget() {
     if (!this.target || this.target === this.activeFloor) {
-      this.setDelay(3, () => {
+      this.setDelay(this.delayTime, () => {
         this.status = EStatus.free;
       });
       return;
