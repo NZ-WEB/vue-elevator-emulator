@@ -10,6 +10,7 @@
       <app-touch-button
         :isActive="hasActiveFloor(getCurrentFloor(floors, floor))"
         @click="addActiveFloor(getCurrentFloor(floors, floor))"
+        :isWaitForElevator="isWaitForElevator(getCurrentFloor(floors, floor))"
       />
     </div>
 
@@ -56,6 +57,14 @@ export default class TheBackgoundLayout extends Vue {
     return 100 / this.floors + "vh";
   }
 
+  public isWaitForElevator(floor: number): boolean {
+    return !!this.elevatorsArr.find(
+      (elevator) =>
+        !!(elevator.getTarget() === floor) &&
+        !(elevator.getActiveFloor() === floor)
+    );
+  }
+
   public getCurrentFloor(floors: number, floor: number): number {
     return floors - floor + 1;
   }
@@ -75,7 +84,7 @@ export default class TheBackgoundLayout extends Vue {
   }
 
   @Watch("floorsCallsTurn", { immediate: true, deep: true })
-  onFloorsChange(val: number[], oldVal: number[]) {
+  onFloorsChange() {
     if (!this.floorsCallsTurn.length) return;
 
     const choiseFreeElevator = () => {

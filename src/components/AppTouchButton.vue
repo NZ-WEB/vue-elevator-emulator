@@ -1,7 +1,10 @@
 <template>
   <button
     class="touch-button"
-    :class="{ 'touch-button_active': isActive }"
+    :class="{
+      'touch-button_active': isActive || isWaitForElevator,
+      blink: isWaitForElevator,
+    }"
   ></button>
 </template>
 
@@ -12,6 +15,9 @@ import { Prop } from "vue-property-decorator";
 export default class AppTouchButton extends Vue {
   @Prop(Boolean)
   readonly isActive!: boolean;
+
+  @Prop(Boolean)
+  readonly isWaitForElevator!: boolean;
 }
 </script>
 
@@ -25,6 +31,18 @@ export default class AppTouchButton extends Vue {
 
   &_active {
     background: #02a0da;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 </style>

@@ -16,8 +16,6 @@ export class Elevator {
   }
 
   public setTarget(floor: number): void {
-    console.log(this.target, "target");
-
     this.target = floor;
     this.status = EStatus.buzy;
     this.goToTarget();
