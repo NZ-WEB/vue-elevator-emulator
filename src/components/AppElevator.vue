@@ -50,8 +50,6 @@ export default class AppElevator extends Vue {
   }
 
   public get getTargetDestination() {
-    console.log(this.target, this.activeFloor);
-
     if (this.target > this.activeFloor) {
       return "↑";
     } else if (this.target < this.activeFloor) {

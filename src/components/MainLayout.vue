@@ -42,18 +42,15 @@ import { EStatus } from "@/types/status.enum";
     AppElevator,
   },
 })
-export default class TheBackgoundLayout extends Vue {
+export default class MainLayout extends Vue {
   @Prop(Number)
   readonly floors!: number;
 
   @Prop(Number)
-  readonly elevatorsCount: number = 3;
+  readonly elevatorsCount!: number;
 
   public floorsCallsTurn: number[] = [];
-  public elevatorsArr: Elevator[] = new ElevatorBuilder(
-    this.elevatorsCount,
-    1
-  ).build();
+  public elevatorsArr: Elevator[] = [];
 
   public get getHeight(): string {
     return 100 / this.floors + "vh";
@@ -83,6 +80,10 @@ export default class TheBackgoundLayout extends Vue {
 
   public addActiveFloor(floor: number): void {
     this.floorsCallsTurn.push(floor);
+  }
+
+  created() {
+    this.elevatorsArr = new ElevatorBuilder(this.elevatorsCount, 1).build();
   }
 
   @Watch("floorsCallsTurn", { immediate: true, deep: true })
