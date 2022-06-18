@@ -22,6 +22,7 @@
       :activeFloor="elevator.getActiveFloor()"
       :floorsCount="floors"
       :hasDelay="elevator.getDelay()"
+      :target="elevator.getTarget()"
     />
   </div>
 </template>
