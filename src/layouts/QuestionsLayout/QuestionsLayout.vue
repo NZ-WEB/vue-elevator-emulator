@@ -4,15 +4,15 @@
       <h4>Конфигуратор</h4>
       <label for="floors">
         Колличество этажей
-        <input type="text" name="floors" v-model="floors" />
+        <input max="20" type="number" name="floors" v-model="floors" />
       </label>
       <label for="elevators">
         Колличество лифтов
-        <input type="text" name="elevators" v-model="elevators" />
+        <input type="number" max="20" name="elevators" v-model="elevators" />
       </label>
       <label for="delay">
         Время задержки на этаже
-        <input type="text" name="delay" v-model="delay" />
+        <input type="number" max="10" name="delay" v-model="delay" />
       </label>
       <button @click="handleSubmit">Сконфигурировать</button>
     </div>
