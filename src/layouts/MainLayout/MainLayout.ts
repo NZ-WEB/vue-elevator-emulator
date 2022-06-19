@@ -41,9 +41,12 @@ export default class MainLayout extends Vue {
   }
 
   private get findFreeElevator(): Elevator | undefined {
-    return this.elevatorsArr.find(
-      (elevator) => elevator.getStatus() === EStatus.free
+    const arrCopy = [...this.elevatorsArr];
+    const sortedArr = arrCopy.sort(
+      (a, b) => a.getActiveFloor() - b.getActiveFloor()
     );
+
+    return sortedArr.find((elevator) => elevator.getStatus() === EStatus.free);
   }
 
   public hasActiveFloor(floor: number): boolean {

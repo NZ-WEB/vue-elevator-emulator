@@ -46,7 +46,7 @@ body {
   margin: 0px !important;
   padding: 0px !important;
 
-  color: #370d85;
+  color: #000;
 }
 
 .blink {
