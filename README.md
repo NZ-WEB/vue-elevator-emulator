@@ -1,5 +1,17 @@
 # vue-elevator-emulator
 
+## Приложение эмулятора лифта
+
+## Ссылка на хостинг с проектом: http://81.163.26.156:5000
+
+## Стек: Vue(Vue-cli) + Typescript(class-style-components) + Jest
+## Контакты:
+```
+Telegram: @nzweb
+Email: nzweb@vk.com 
+```
+
+
 ## Project setup
 ```
 yarn install
@@ -7,7 +19,7 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn start
 ```
 
 ### Compiles and minifies for production
@@ -25,5 +37,3 @@ yarn test:unit
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
