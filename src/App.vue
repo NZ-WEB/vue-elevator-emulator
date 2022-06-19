@@ -1,27 +1,63 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <questions-layout v-if="!configured" @setConfig="setConfig" />
+  <main-layout
+    v-if="configured"
+    :floors="+floors"
+    :elevatorsCount="+elevators"
+    :delay="+delay"
+  />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import MainLayout from "./layouts/MainLayout/MainLayout.vue";
+import QuestionsLayout from "./layouts/QuestionsLayout/QuestionsLayout.vue";
+import { IConfig } from "./types/config.interface";
 
 @Options({
   components: {
-    HelloWorld,
+    MainLayout,
+    QuestionsLayout,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  public elevators!: number;
+  public floors!: number;
+  public delay!: number;
+  public configured = false;
+
+  public setConfig({ delay, elevators, floors }: IConfig) {
+    this.elevators = elevators;
+    this.floors = floors;
+    this.delay = delay;
+    this.configured = true;
+  }
+}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  margin: 0px !important;
+  padding: 0px !important;
+
+  color: #000;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 </style>
